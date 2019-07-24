@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.0.0/firebaseui.css" />>
 	<meta charset="utf-8">
 	<title>Bootstrap, from Twitter</title>
 	<meta name="description" content="">
@@ -51,16 +51,37 @@
 </head>
 
 <body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyDGsqog_ssUFkBY7tWLZTw2FXfJKUx514o",
+    authDomain: "angular-tevq1h.firebaseapp.com",
+    databaseURL: "https://angular-tevq1h.firebaseio.com",
+    projectId: "angular-tevq1h",
+    storageBucket: "",
+    messagingSenderId: "733377500847",
+    appId: "1:733377500847:web:f6f1ae002408cb2b"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
 	<div class="container">
 		<div class="content">
 			<div class="row">
 				<div class="login-form">
 					<h2>Welcome to my App!!</h2>
-					<form action="">
+					<form action="" #f="ngForm">
 						<fieldset>
 
 							<dev>
-              <button href='' class="btn primary" type="submit" >Sign in with TWITTER </button> <br> </br>
+              <button type="submit" class="btn btn-primary">Sign in with TWITTER</button> <br> </br>
 							</dev>
               <dev>
               <a href="https://twitter.com/intent/tweet?screen_name=TwitterDev&ref_src=twsrc%5Etfw" class="twitter-mention-button" data-show-count="false">Tweet to @TwitterDev</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> <br> </br>
