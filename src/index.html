@@ -2,63 +2,68 @@
 <html lang="en">
 
 <head <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.0.0/firebaseui.css" />>
-	<meta charset="utf-8">
-	<title>Bootstrap, from Twitter</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
+<meta charset="utf-8">
+<title>Bootstrap, from Twitter</title>
+<meta name="description" content="">
+<meta name="author" content="">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.12.0/bootstrap-social.min.css">
+  
+
+<link href="../bootstrap.css" rel="stylesheet">
+<style type="text/css">
+	html,
+	body {
+		background-color: #eee;
+	}
+
+	body {
+		padding-top: 40px;
+	}
+
+	.container {
+		width: 300px;
+	}
 
 
-	<link href="../bootstrap.css" rel="stylesheet">
-	<style type="text/css">
+	.container>.content {
+		background-color: #fff;
+		padding: 5px;
+		margin: 1 -20px;
+		-webkit-border-radius: 10px 10px 10px 10px;
+		-moz-border-radius: 10px 10px 10px 10px;
+		border-radius: 10px 10px 10px 10px;
+		-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+		-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+		box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
+	}
 
-		html,
-		body {
-			background-color: #eee;
-		}
+	.login-form {
+		margin-left: 65px;
+	}
 
-		body {
-			padding-top: 40px;
-		}
-
-		.container {
-			width: 300px;
-		}
-
-
-		.container>.content {
-			background-color: #fff;
-			padding: 5px;
-			margin: 1 -20px;
-			-webkit-border-radius: 10px 10px 10px 10px;
-			-moz-border-radius: 10px 10px 10px 10px;
-			border-radius: 10px 10px 10px 10px;
-			-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
-			-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
-			box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
-		}
-
-		.login-form {
-			margin-left: 65px;
-		}
-
-		legend {
-			margin-right: -50px;
-			font-weight: bold;
-			color: #404040;
-		}
-	</style>
+	legend {
+		margin-right: -50px;
+		font-weight: bold;
+		color: #404040;
+	}
+</style>
 
 </head>
 
 <body>
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js"></script>
+	<!-- The core Firebase JS SDK is always required and must be listed first -->
+	<script src="https://www.gstatic.com/firebasejs/6.3.1/firebase-app.js">
+	</script>
 
-<!-- TODO: Add SDKs for Firebase products that you want to use
+	<!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#config-web-app -->
 
-<script>
-  // Your web app's Firebase configuration
+	<script>
+		// Your web app's Firebase configuration
   var firebaseConfig = {
     apiKey: "AIzaSyDGsqog_ssUFkBY7tWLZTw2FXfJKUx514o",
     authDomain: "angular-tevq1h.firebaseapp.com",
@@ -70,7 +75,9 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-</script>
+
+	</script>
+  
 
 	<div class="container">
 		<div class="content">
@@ -81,8 +88,33 @@
 						<fieldset>
 
 							<dev>
-              <button type="submit" class="btn btn-primary">Sign in with TWITTER</button> <br> </br>
-							</dev>
+								    <a id="twitter-button" class="btn btn-block btn-social btn-twitter">
+      <i class="fa fa-twitter"></i> Sign in with Twitter
+    </a>
+
+    <script>
+      $('#twitter-button').on('click', function() {
+        // Initialize with your OAuth.io app public key
+        OAuth.initialize('YOUR_OAUTH_KEY');
+        // Use popup for OAuth
+        OAuth.popup('twitter').then(twitter => {
+        console.log('twitter:', twitter);
+        // Prompts 'welcome' message with User's email on successful login
+        // #me() is a convenient method to retrieve user data without requiring you
+        // to know which OAuth provider url to call
+        twitter.me().then(data => {
+          console.log('data:', data);
+          alert('Twitter says your email is:' + data.email + ".\nView browser 'Console Log' for more details");
+        });
+        // Retrieves user data from OAuth provider by using #get() and
+        // OAuth provider url    
+        twitter.get('/1.1/account/verify_credentials.json?include_email=true').then(data => {
+          console.log('self data:', data);
+        })    
+      });
+    })
+    </script> <br> </br>
+            	</dev>
               <dev>
               <a href="https://twitter.com/intent/tweet?screen_name=TwitterDev&ref_src=twsrc%5Etfw" class="twitter-mention-button" data-show-count="false">Tweet to @TwitterDev</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> <br> </br>
               </dev>
